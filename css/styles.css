@@ -64,11 +64,21 @@ body {
 .section {
   float: left;
 }
-.section.left {
-  width: 70%;
-}
 .section.right {
-  width: 30%;
+  width: 60%;
+}
+.code-holder {
+  padding: 10px 30px;
+}
+.code {
+  font-family: "Lucida Console", Monaco, monospace;
+  display: inline-block;
+}
+.section.left {
+  width: 20%;
+}
+.section.middle {
+  width: 20%;
 }
 ul.script {
   min-height: 10px;
