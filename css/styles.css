@@ -8,6 +8,9 @@ body {
 .main-content {
   clear: both;
 }
+.main-content {
+  padding: 10px;
+}
 #main-container {
   min-height: 100%;
 }
@@ -37,6 +40,7 @@ body {
   line-height: 50px;
   margin: 0;
   float: left;
+  height: 50px;
 }
 .header img,
 .footer img {
