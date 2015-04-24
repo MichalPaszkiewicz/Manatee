@@ -44,6 +44,9 @@ body {
   height: 50px;
   margin: 0 10px;
 }
+.header {
+  position: fixed;
+}
 .footer,
 .push {
   clear: both;
