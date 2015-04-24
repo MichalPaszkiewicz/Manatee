@@ -73,6 +73,7 @@ body {
 .code {
   font-family: "Lucida Console", Monaco, monospace;
   display: inline-block;
+  line-height: 18px;
 }
 .section.left {
   width: 20%;

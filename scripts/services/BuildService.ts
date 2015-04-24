@@ -2,15 +2,19 @@
 
     export class BuildService{
 
-        codeArray: string[];
+        codeArray: Code[];
 
         toCode: () => string;
 
         build: () => void;
 
-        insert: (code: string, position?: number) => void;
+        insert: (code: Code, position?: number) => void;
 
         selector: string;
+
+        getCode: (id: string) => string;
+
+        editCode: (id: string, update: (x) => void) => void;
 
         constructor(selector: string) {
 
@@ -25,19 +29,32 @@
                 var stringArray = [];
 
                 for (var i = 0; i < self.codeArray.length; i++) {
-                    stringArray.push("<div>" + self.codeArray[i] + "</div>");
+                    stringArray.push("<div>" + self.codeArray[i].code + "</div>");
                 }
 
-                return stringArray.join("");
+                stringArray.push("//....................xXXXXx.................//");
+                stringArray.push("//...............xXXXX......XXXXXXx..........//");
+                stringArray.push("//...XXx.....xXXX..................XXXXXXx...//");
+                stringArray.push("//.X....XXXXX.............................Xx.//");
+                stringArray.push("//X....................................O....X//");
+                stringArray.push("//.X....xXXXXXXx.............X.....X...------//");
+                stringArray.push("//...XXX........XXx.......xXX.X.....X....xXX.//");
+                stringArray.push("//.................XXXXXXX....X.....XXXX.....//");
+                stringArray.push("//.....MANATEE.................X...xX........//");
+                stringArray.push("//..............................XXXX.........//");
+
+
+
+                return stringArray.join("</br>");
             }
 
-            this.insert = function(code: string, position?: number){
-                
+            this.insert = function (code: Code, position?: number) {
+
                 if (position == null) {
                     self.codeArray.push(code);
                 }
                 else {
-                    var newArray: string[] = [];
+                    var newArray: Code[] = [];
 
                     for (var i = 0; i < self.codeArray.length; i++) {
                         if (position == i) {
@@ -52,10 +69,26 @@
                 self.build();
             }
 
-            this.build = function(){
+            this.build = function () {
 
                 $(self.selector).html(this.toCode());
 
+            }
+
+            this.getCode = function (id: string) {
+                for (var i = 0; i < self.codeArray.length; i++) {
+                    if (self.codeArray[i].ID == id) {
+                        return self.codeArray[i].code;
+                    }
+                }
+            }
+
+            this.editCode = function (id: string, update: (x) => void) {
+                for (var i = 0; i < self.codeArray.length; i++) {
+                    if (self.codeArray[i].ID == id) {
+                        update(self.codeArray[i]);
+                    }
+                }
             }
 
         }
