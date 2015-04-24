@@ -1,25 +1,63 @@
 var App;
 (function (App) {
+    var BuildService = (function () {
+        function BuildService(selector) {
+            this.selector = selector;
+            this.codeArray = [];
+            var self = this;
+            this.toCode = function () {
+                var stringArray = [];
+                for (var i = 0; i < self.codeArray.length; i++) {
+                    stringArray.push("<div>" + self.codeArray[i] + "</div>");
+                }
+                return stringArray.join("");
+            };
+            this.insert = function (code, position) {
+                if (position == null) {
+                    self.codeArray.push(code);
+                }
+                else {
+                    var newArray = [];
+                    for (var i = 0; i < self.codeArray.length; i++) {
+                        if (position == i) {
+                            newArray.push(code);
+                        }
+                        newArray.push(self.codeArray[i]);
+                    }
+                    self.codeArray = newArray;
+                }
+                self.build();
+            };
+            this.build = function () {
+                $(self.selector).html(this.toCode());
+            };
+        }
+        return BuildService;
+    })();
+    App.BuildService = BuildService;
+})(App || (App = {}));
+/// <reference path="services/buildservice.ts" />
+var App;
+(function (App) {
     var Control;
     (function (Control) {
+        var buildService = new App.BuildService(".code");
         function DragDrop(item) {
-            console.log(item);
             var txt = item.textContent.trim();
             var dragger = $("<div class='dragger'>" + txt + "</div>");
             $(".main-content").append(dragger);
             var x = item.offsetLeft;
             var y = item.offsetTop;
-            console.log(x + " " + y);
             dragger.css({ width: item.clientWidth, left: x, top: y });
             $(document).on("mousemove", function (e) {
-                console.log(e.clientX + "," + e.clientY);
                 dragger.css({ left: e.clientX - item.clientWidth / 2, top: e.clientY - item.clientHeight / 2 });
             });
             $(document).on("mouseup", function (e) {
                 $(document).unbind("mousemove");
-                var leftBox = $(".section.left .script")[0];
-                if (e.clientX < leftBox.offsetLeft + leftBox.clientWidth) {
-                    $(leftBox).append($(App.getConstruct(new App.TextConstruct(txt))));
+                var middleBox = $(".script")[0];
+                if (e.clientX > middleBox.offsetLeft) {
+                    $(middleBox).append($(App.getConstruct(new App.TextConstruct(txt))));
+                    buildService.insert(txt);
                 }
                 dragger.remove();
                 $(document).unbind("mouseup");
@@ -45,21 +83,6 @@ var App;
         return TextConstruct;
     })();
     App.TextConstruct = TextConstruct;
-})(App || (App = {}));
-var App;
-(function (App) {
-    var BuildService = (function () {
-        function BuildService() {
-            this.codeArray = [];
-            this.toCode = function () {
-                return "";
-            };
-            this.build = function (selector) {
-                $(selector).html(this.toCode);
-            };
-        }
-        return BuildService;
-    })();
 })(App || (App = {}));
 var App;
 (function (App) {

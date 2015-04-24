@@ -36,6 +36,7 @@
     <TypeScriptCompile Include="scripts\app.ts" />
     <TypeScriptCompile Include="scripts\classes\text.ts" />
     <TypeScriptCompile Include="scripts\interfaces\IConstructable.ts" />
+    <TypeScriptCompile Include="scripts\services\BuildService.ts" />
     <TypeScriptCompile Include="scripts\services\ElementConstructService.ts" />
     <TypeScriptCompile Include="scripts\services\LocalStorageService.ts" />
     <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
