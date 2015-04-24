@@ -27,7 +27,11 @@
             var leftBox = $(".section.left .script")[0];
 
             if (e.clientX < leftBox.offsetLeft + leftBox.clientWidth) {
-                $(leftBox).append($("<li>" + txt + "</li>"));
+
+
+                $(leftBox).append($(getConstruct(new TextConstruct(txt))));
+
+
             }
 
             dragger.remove();

@@ -34,6 +34,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\app.ts" />
+    <TypeScriptCompile Include="scripts\classes\text.ts" />
+    <TypeScriptCompile Include="scripts\interfaces\IConstructable.ts" />
+    <TypeScriptCompile Include="scripts\services\ElementConstructService.ts" />
     <TypeScriptCompile Include="scripts\services\LocalStorageService.ts" />
     <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
@@ -52,9 +55,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="scripts\classes\" />
     <Folder Include="scripts\enums\" />
-    <Folder Include="scripts\interfaces\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
