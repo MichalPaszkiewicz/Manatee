@@ -4,3 +4,9 @@ C:\Users\michal.paszkiewicz\Desktop\Manatee\bin\Manatee.pdb
 C:\Users\michal.paszkiewicz\Desktop\Manatee\obj\Debug\Manatee.dll
 C:\Users\michal.paszkiewicz\Desktop\Manatee\obj\Debug\Manatee.pdb
 C:\Users\michal.paszkiewicz\Desktop\Manatee\obj\Debug\Manatee.csprojResolveAssemblyReference.cache
+C:\Users\michal.paszkiewicz\Documents\github\Manatee\bin\Manatee.dll.config
+C:\Users\michal.paszkiewicz\Documents\github\Manatee\bin\Manatee.dll
+C:\Users\michal.paszkiewicz\Documents\github\Manatee\bin\Manatee.pdb
+C:\Users\michal.paszkiewicz\Documents\github\Manatee\obj\Debug\Manatee.csprojResolveAssemblyReference.cache
+C:\Users\michal.paszkiewicz\Documents\github\Manatee\obj\Debug\Manatee.dll
+C:\Users\michal.paszkiewicz\Documents\github\Manatee\obj\Debug\Manatee.pdb
