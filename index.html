@@ -19,17 +19,17 @@
 
         <div class="main-content">
 
+            <script src="@script.js"></script>
+
             <div class="section left">
                 <ul class="toolbox">
-                    <li>
-                        Custom
-                    </li>
-                    <li>
-                        CRUD
-                    </li>
-                    <li>
-                        Search
-                    </li>
+                    <script>
+                        for (var property in App.snippets) {
+                            document.writeln("<li>" + property + "</li>");
+                        }
+
+                        App.Control.setUp()
+                    </script>
                 </ul>
             </div>
 
@@ -52,7 +52,5 @@
         <div class="push"></div>
     </div>
     <div class="footer"></div>
-
-    <script src="@script.js"></script>
 </body>
 </html>

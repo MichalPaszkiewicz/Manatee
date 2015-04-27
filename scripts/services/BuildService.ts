@@ -29,7 +29,8 @@
                 var stringArray = [];
 
                 for (var i = 0; i < self.codeArray.length; i++) {
-                    stringArray.push("<div>" + self.codeArray[i].code + "</div>");
+                    var codeString = self.codeArray[i].code;
+                    stringArray.push("<div>" + codeString + "</div>");
                 }
 
                 stringArray.push("//....................xXXXXx.................//");
@@ -42,8 +43,6 @@
                 stringArray.push("//.................XXXXXXX....X.....XXXX.....//");
                 stringArray.push("//.....MANATEE.................X...xX........//");
                 stringArray.push("//..............................XXXX.........//");
-
-
 
                 return stringArray.join("</br>");
             }

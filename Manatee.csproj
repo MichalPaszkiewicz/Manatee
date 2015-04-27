@@ -34,11 +34,17 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\app.ts" />
-    <TypeScriptCompile Include="scripts\classes\text.ts" />
+    <TypeScriptCompile Include="scripts\classes\code.ts" />
+    <TypeScriptCompile Include="scripts\classes\textConstruct.ts" />
+    <TypeScriptCompile Include="scripts\defaults\snippets.ts" />
     <TypeScriptCompile Include="scripts\interfaces\IConstructable.ts" />
     <TypeScriptCompile Include="scripts\services\BuildService.ts" />
+    <TypeScriptCompile Include="scripts\services\CodeEditService.ts" />
     <TypeScriptCompile Include="scripts\services\ElementConstructService.ts" />
+    <TypeScriptCompile Include="scripts\services\GuidGeneratorService.ts" />
+    <TypeScriptCompile Include="scripts\services\KeyWordService.ts" />
     <TypeScriptCompile Include="scripts\services\LocalStorageService.ts" />
+    <TypeScriptCompile Include="scripts\services\CodeService.ts" />
     <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>

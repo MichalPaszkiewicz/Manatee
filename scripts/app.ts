@@ -3,19 +3,19 @@ module App.Control {
 
     export var buildService = new BuildService(".code");
 
-    function DragDrop(item : HTMLLIElement) {
+    function DragDrop(item: HTMLLIElement) {
 
         var txt = item.textContent.trim();
 
         var dragger = $("<div class='dragger'>" + txt + "</div>");
         $(".main-content").append(dragger);
 
-        dragger.css({ width: item.clientWidth, left: item.offsetLeft, top: item.offsetTop});
+        dragger.css({ width: item.clientWidth, left: item.offsetLeft, top: item.offsetTop });
 
         $(document).on("mousemove", function (e) {
-            dragger.css({ left: e.clientX - item.clientWidth / 2, top: e.clientY - item.clientHeight / 2});
+            dragger.css({ left: e.clientX - item.clientWidth / 2, top: e.clientY - item.clientHeight / 2 });
         });
-        
+
         $(document).on("mouseup", function (e) {
             $(document).unbind("mousemove");
             var middleBox = $(".script")[0];
@@ -30,14 +30,17 @@ module App.Control {
 
             dragger.remove();
             $(document).unbind("mouseup");
-        });    
+        });
     }
 
-    $(".toolbox li").mousedown(function (e) {
-        e.preventDefault();
-        if (this instanceof HTMLLIElement) {
-            DragDrop(this);
-        }
-        $(".dragger").css({cursor:"-webkit-grabbing"});
-    }); 
+    export function setUp() {
+        $(".toolbox li").mousedown(function (e) {
+            e.preventDefault();
+            if (this instanceof HTMLLIElement) {
+                DragDrop(this);
+            }
+            $(".dragger").css({ cursor: "-webkit-grabbing" });
+        });
+    }
+
 } 
