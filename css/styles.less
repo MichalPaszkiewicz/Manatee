@@ -136,9 +136,25 @@ ul.toolbox, .script {
 }
 
 @media (max-width: 600px) {
-    .section, .section.left, .section.right {
+    .section, .section.left, .section.right, .section.middle {
         clear: both;
         width: 100%;
         min-height: 0;
     }
+
+    ul.script{
+        width: 100%;
+
+        li{
+            display: inline-block;
+              width: initial;
+              padding: 5px;
+              margin: 3px;
+        }
+    }
+
+    .disappear{
+        display: none;
+    }
 }
+

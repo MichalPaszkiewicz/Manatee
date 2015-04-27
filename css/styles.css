@@ -132,10 +132,23 @@ ul.toolbox li:hover,
 @media (max-width: 600px) {
   .section,
   .section.left,
-  .section.right {
+  .section.right,
+  .section.middle {
     clear: both;
     width: 100%;
     min-height: 0;
+  }
+  ul.script {
+    width: 100%;
+  }
+  ul.script li {
+    display: inline-block;
+    width: initial;
+    padding: 5px;
+    margin: 3px;
+  }
+  .disappear {
+    display: none;
   }
 }
 /*# sourceMappingURL=styles.css.map */
