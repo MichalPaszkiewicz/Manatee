@@ -8,7 +8,8 @@ var App;
             this.toCode = function () {
                 var stringArray = [];
                 for (var i = 0; i < self.codeArray.length; i++) {
-                    stringArray.push("<div>" + self.codeArray[i].code + "</div>");
+                    var codeString = self.codeArray[i].code;
+                    stringArray.push("<div>" + codeString + "</div>");
                 }
                 stringArray.push("//....................xXXXXx.................//");
                 stringArray.push("//...............xXXXX......XXXXXXx..........//");
@@ -86,13 +87,16 @@ var App;
                 $(document).unbind("mouseup");
             });
         }
-        $(".toolbox li").mousedown(function (e) {
-            e.preventDefault();
-            if (this instanceof HTMLLIElement) {
-                DragDrop(this);
-            }
-            $(".dragger").css({ cursor: "-webkit-grabbing" });
-        });
+        function setUp() {
+            $(".toolbox li").mousedown(function (e) {
+                e.preventDefault();
+                if (this instanceof HTMLLIElement) {
+                    DragDrop(this);
+                }
+                $(".dragger").css({ cursor: "-webkit-grabbing" });
+            });
+        }
+        Control.setUp = setUp;
     })(Control = App.Control || (App.Control = {}));
 })(App || (App = {}));
 var App;
@@ -120,35 +124,25 @@ var App;
 })(App || (App = {}));
 var App;
 (function (App) {
+    App.snippets = {
+        Add: ["// ---- Add MyObject ----", "run test Add my object: {NAME}", "login as myuser@uat.co", "click My Objects", "</br>"],
+        Cancel: ["// ---- Cancel button ---", "click New My Object", "click Cancel", 'expect header "My objects"', "</br>"],
+        Edit: ["// ---- Edit ----", 'at row "{NAME}" click Edit', 'set Name -> "Edited Name"', "click Save", 'expect row "Edited Name"'],
+        SearchExclusion: ["// ---- Search: Exclusion ----", 'set Find -> "non-existent"', "click Search", "</br>"],
+        SearchInclusion: ["// ---- Search: Inclusion ----", 'set Find -> "Edited Name"', "click Search", 'expect row "Edited Name"', "</br>"],
+        Delete: ["// ---- Delete ----", 'at row "Edited Name" click Delete', 'expect "Are you sure you want to delete MyObject?"', "click Cancel", 'expect row "Edited Name"', 'at row "Edited Name" click Delete', "click Yes", 'expect no row "Edited Name"'],
+        Custom: ["Custom text"]
+    };
+    App.snippets["CRUD"] = [App.snippets.Add, App.snippets.Cancel, App.snippets.Edit, App.snippets.SearchExclusion, App.snippets.SearchInclusion, App.snippets.Delete].join().split(",");
+})(App || (App = {}));
+var App;
+(function (App) {
     function editCode(id) {
         var code = App.Control.buildService.getCode(id);
         App.Control.buildService.editCode(id, function () {
         });
     }
     App.editCode = editCode;
-})(App || (App = {}));
-var App;
-(function (App) {
-    function getCode(text) {
-        switch (text) {
-            case "Custom":
-                return "Custom text";
-            case "CRUD":
-                var result = ["// ---- Add MyObject ----", "run test Add my object: {NAME}", "login as myuser@uat.co", "click My Objects", "</br>", "// ---- Cancel button ---", "click New My Object", "click Cancel", 'expect header "My objects"', "</br>", "// ---- Edit ----", 'at row "{NAME}" click Edit', 'set Name -> "Edited Name"', "click Save", 'expect row "Edited Name"'];
-                for (var i = 0; i < result.length; i++) {
-                    result[i] = "<div>" + result[i] + "</div>";
-                }
-                return result.join("");
-            case "Search":
-                var result = ["// ---- Search: Exclusion ----", 'set Find -> "non-existent"', "click Search", "</br>", "// ---- Search: Inclusion ----", 'set Find -> "Edited Name"', "click Search", 'expect row "Edited Name"', "</br>", "// ---- Delete ----", 'at row "Edited Name" click Delete', 'expect "Are you sure you want to delete MyObject?"', "click Cancel", 'expect row "Edited Name"', 'at row "Edited Name" click Delete', "click Yes", 'expect no row "Edited Name"'];
-                for (var i = 0; i < result.length; i++) {
-                    result[i] = "<div>" + result[i] + "</div>";
-                }
-                return result.join("");
-            default:
-        }
-    }
-    App.getCode = getCode;
 })(App || (App = {}));
 var App;
 (function (App) {
@@ -171,6 +165,32 @@ var App;
 })(App || (App = {}));
 var App;
 (function (App) {
+    function replaceWholeWord(text, word, replaceWord) {
+        var rge = new RegExp("\\b" + word + "\\b");
+        text = text.replace(rge, replaceWord);
+        return text;
+    }
+    function wrapWord(word) {
+        return "<span class='blue'>" + word + "</span>";
+    }
+    var KeyWordService = (function () {
+        function KeyWordService(keywords) {
+            this.keywords = keywords;
+            var me = this;
+            this.replaceKeywordsWithSpan = function (text) {
+                for (var i = 0; i < me.keywords.length; i++) {
+                    text = replaceWholeWord(text, keywords[i], wrapWord(keywords[i]));
+                }
+                return text;
+            };
+        }
+        return KeyWordService;
+    })();
+    var keyWords = ["run", "login", "as", "click", "expect", "at", "row", "set"];
+    App.keyWordService = new KeyWordService(keyWords);
+})(App || (App = {}));
+var App;
+(function (App) {
     var LocalStorageService = (function () {
         function LocalStorageService() {
             this.getItem = function (itemName) {
@@ -184,5 +204,77 @@ var App;
         return LocalStorageService;
     })();
     App.Database = new LocalStorageService();
+})(App || (App = {}));
+var App;
+(function (App) {
+    function wrapText(text) {
+        text = App.keyWordService.replaceKeywordsWithSpan(text);
+        var className = "";
+        if (text.indexOf("//") == 0) {
+            className = "green";
+        }
+        text = "<div class='" + className + "'>" + text + "</div>";
+        return text;
+    }
+    function getCode(text) {
+        var newText = App.snippets[text];
+        for (var i = 0; i < newText.length; i++) {
+            var temptext = newText[i];
+            newText[i] = wrapText(temptext);
+        }
+        return newText.join("");
+        //switch (text) {
+        //    case "Custom":
+        //        return "Custom text";
+        //    case "CRUD":
+        //        var result = ["// ---- Add MyObject ----",
+        //            "run test Add my object: {NAME}",
+        //            "login as myuser@uat.co",
+        //            "click My Objects",
+        //            "</br>",
+        //            "// ---- Cancel button ---",
+        //            "click New My Object",
+        //            "click Cancel",
+        //            'expect header "My objects"',
+        //            "</br>",
+        //            "// ---- Edit ----",
+        //            'at row "{NAME}" click Edit',
+        //            'set Name -> "Edited Name"',
+        //            "click Save",
+        //            'expect row "Edited Name"'
+        //        ];
+        //        for (var i = 0; i < result.length; i++) {
+        //            var text = result[i];
+        //            result[i] = wrapText(text);
+        //        }
+        //        return result.join("");
+        //    case "Search":
+        //        var result = ["// ---- Search: Exclusion ----",
+        //            'set Find -> "non-existent"',
+        //            "click Search",
+        //            "</br>",
+        //            "// ---- Search: Inclusion ----",
+        //            'set Find -> "Edited Name"',
+        //            "click Search",
+        //            'expect row "Edited Name"',
+        //            "</br>",
+        //            "// ---- Delete ----",
+        //            'at row "Edited Name" click Delete',
+        //            'expect "Are you sure you want to delete MyObject?"',
+        //            "click Cancel",
+        //            'expect row "Edited Name"',
+        //            'at row "Edited Name" click Delete',
+        //            "click Yes",
+        //            'expect no row "Edited Name"'
+        //        ];
+        //        for (var i = 0; i < result.length; i++) {
+        //            var text = result[i];
+        //            result[i] = wrapText(text);
+        //        }
+        //        return result.join("");
+        //    default:
+        //}
+    }
+    App.getCode = getCode;
 })(App || (App = {}));
 //# sourceMappingURL=@script.js.map

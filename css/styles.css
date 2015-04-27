@@ -74,12 +74,20 @@ body {
   font-family: "Lucida Console", Monaco, monospace;
   display: inline-block;
   line-height: 18px;
+  font-size: 12px;
+  word-spacing: 10px;
 }
 .section.left {
   width: 20%;
 }
 .section.middle {
   width: 20%;
+}
+.green {
+  color: green;
+}
+.blue {
+  color: blue;
 }
 ul.script {
   min-height: 10px;
