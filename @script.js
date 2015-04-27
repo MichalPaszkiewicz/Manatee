@@ -11,16 +11,16 @@ var App;
                     var codeString = self.codeArray[i].code;
                     stringArray.push("<div>" + codeString + "</div>");
                 }
-                stringArray.push("//....................xXXXXx.................//");
-                stringArray.push("//...............xXXXX......XXXXXXx..........//");
-                stringArray.push("//...XXx.....xXXX..................XXXXXXx...//");
-                stringArray.push("//.X....XXXXX.............................Xx.//");
-                stringArray.push("//X....................................O....X//");
-                stringArray.push("//.X....xXXXXXXx.............X.....X...------//");
-                stringArray.push("//...XXX........XXx.......xXX.X.....X....xXX.//");
-                stringArray.push("//.................XXXXXXX....X.....XXXX.....//");
-                stringArray.push("//.....MANATEE.................X...xX........//");
-                stringArray.push("//..............................XXXX.........//");
+                stringArray.push("<span class='green'>//....................xXXXXx.................//</span>");
+                stringArray.push("<span class='green'>//...............xXXXX......XXXXXXx..........//</span>");
+                stringArray.push("<span class='green'>//...XXx.....xXXX..................XXXXXXx...//</span>");
+                stringArray.push("<span class='green'>//.X....XXXXX.............................Xx.//</span>");
+                stringArray.push("<span class='green'>//X....................................O....X//</span>");
+                stringArray.push("<span class='green'>//.X....xXXXXXXx.............X.....X...------//</span>");
+                stringArray.push("<span class='green'>//...XXX........XXx.......xXX.X.....X....xXX.//</span>");
+                stringArray.push("<span class='green'>//.................XXXXXXX....X.....XXXX.....//</span>");
+                stringArray.push("<span class='green'>//.....MANATEE.................X...xX........//</span>");
+                stringArray.push("<span class='green'>//..............................XXXX.........//</span>");
                 return stringArray.join("</br>");
             };
             this.insert = function (code, position) {
@@ -146,6 +146,27 @@ var App;
 })(App || (App = {}));
 var App;
 (function (App) {
+    function wrapText(text) {
+        text = App.keyWordService.replaceKeywordsWithSpan(text);
+        var className = "";
+        if (text.indexOf("//") == 0) {
+            className = "green";
+        }
+        text = "<div class='" + className + "'>" + text + "</div>";
+        return text;
+    }
+    function getCode(text) {
+        var newText = App.snippets[text];
+        for (var i = 0; i < newText.length; i++) {
+            var temptext = newText[i];
+            newText[i] = wrapText(temptext);
+        }
+        return newText.join("");
+    }
+    App.getCode = getCode;
+})(App || (App = {}));
+var App;
+(function (App) {
     function getConstruct(item, id) {
         var onclick = "onclick='App.editCode(" + id + ")'";
         var totalString = "<li " + onclick + ">" + item.constructString() + "</li>";
@@ -204,77 +225,5 @@ var App;
         return LocalStorageService;
     })();
     App.Database = new LocalStorageService();
-})(App || (App = {}));
-var App;
-(function (App) {
-    function wrapText(text) {
-        text = App.keyWordService.replaceKeywordsWithSpan(text);
-        var className = "";
-        if (text.indexOf("//") == 0) {
-            className = "green";
-        }
-        text = "<div class='" + className + "'>" + text + "</div>";
-        return text;
-    }
-    function getCode(text) {
-        var newText = App.snippets[text];
-        for (var i = 0; i < newText.length; i++) {
-            var temptext = newText[i];
-            newText[i] = wrapText(temptext);
-        }
-        return newText.join("");
-        //switch (text) {
-        //    case "Custom":
-        //        return "Custom text";
-        //    case "CRUD":
-        //        var result = ["// ---- Add MyObject ----",
-        //            "run test Add my object: {NAME}",
-        //            "login as myuser@uat.co",
-        //            "click My Objects",
-        //            "</br>",
-        //            "// ---- Cancel button ---",
-        //            "click New My Object",
-        //            "click Cancel",
-        //            'expect header "My objects"',
-        //            "</br>",
-        //            "// ---- Edit ----",
-        //            'at row "{NAME}" click Edit',
-        //            'set Name -> "Edited Name"',
-        //            "click Save",
-        //            'expect row "Edited Name"'
-        //        ];
-        //        for (var i = 0; i < result.length; i++) {
-        //            var text = result[i];
-        //            result[i] = wrapText(text);
-        //        }
-        //        return result.join("");
-        //    case "Search":
-        //        var result = ["// ---- Search: Exclusion ----",
-        //            'set Find -> "non-existent"',
-        //            "click Search",
-        //            "</br>",
-        //            "// ---- Search: Inclusion ----",
-        //            'set Find -> "Edited Name"',
-        //            "click Search",
-        //            'expect row "Edited Name"',
-        //            "</br>",
-        //            "// ---- Delete ----",
-        //            'at row "Edited Name" click Delete',
-        //            'expect "Are you sure you want to delete MyObject?"',
-        //            "click Cancel",
-        //            'expect row "Edited Name"',
-        //            'at row "Edited Name" click Delete',
-        //            "click Yes",
-        //            'expect no row "Edited Name"'
-        //        ];
-        //        for (var i = 0; i < result.length; i++) {
-        //            var text = result[i];
-        //            result[i] = wrapText(text);
-        //        }
-        //        return result.join("");
-        //    default:
-        //}
-    }
-    App.getCode = getCode;
 })(App || (App = {}));
 //# sourceMappingURL=@script.js.map

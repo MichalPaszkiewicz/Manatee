@@ -33,16 +33,16 @@
                     stringArray.push("<div>" + codeString + "</div>");
                 }
 
-                stringArray.push("//....................xXXXXx.................//");
-                stringArray.push("//...............xXXXX......XXXXXXx..........//");
-                stringArray.push("//...XXx.....xXXX..................XXXXXXx...//");
-                stringArray.push("//.X....XXXXX.............................Xx.//");
-                stringArray.push("//X....................................O....X//");
-                stringArray.push("//.X....xXXXXXXx.............X.....X...------//");
-                stringArray.push("//...XXX........XXx.......xXX.X.....X....xXX.//");
-                stringArray.push("//.................XXXXXXX....X.....XXXX.....//");
-                stringArray.push("//.....MANATEE.................X...xX........//");
-                stringArray.push("//..............................XXXX.........//");
+                stringArray.push("<span class='green'>//....................xXXXXx.................//</span>");
+                stringArray.push("<span class='green'>//...............xXXXX......XXXXXXx..........//</span>");
+                stringArray.push("<span class='green'>//...XXx.....xXXX..................XXXXXXx...//</span>");
+                stringArray.push("<span class='green'>//.X....XXXXX.............................Xx.//</span>");
+                stringArray.push("<span class='green'>//X....................................O....X//</span>");
+                stringArray.push("<span class='green'>//.X....xXXXXXXx.............X.....X...------//</span>");
+                stringArray.push("<span class='green'>//...XXX........XXx.......xXX.X.....X....xXX.//</span>");
+                stringArray.push("<span class='green'>//.................XXXXXXX....X.....XXXX.....//</span>");
+                stringArray.push("<span class='green'>//.....MANATEE.................X...xX........//</span>");
+                stringArray.push("<span class='green'>//..............................XXXX.........//</span>");
 
                 return stringArray.join("</br>");
             }
