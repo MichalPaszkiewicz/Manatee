@@ -41,7 +41,7 @@
                 stringArray.push("<span class='green'>//.X....xXXXXXXx.............X.....X...------//</span>");
                 stringArray.push("<span class='green'>//...XXX........XXx.......xXX.X.....X....xXX.//</span>");
                 stringArray.push("<span class='green'>//.................XXXXXXX....X.....XXXX.....//</span>");
-                stringArray.push("<span class='green'>//.....MANATEE.................X...xX........//</span>");
+                stringArray.push("<span class='green'>//.......MANATEE...............X...xX........//</span>");
                 stringArray.push("<span class='green'>//..............................XXXX.........//</span>");
 
                 return stringArray.join("</br>");
